@@ -1,0 +1,100 @@
+{
+    "savings_sums": {
+        "pred": 107594, 
+        "actual": 8796
+    }, 
+    "name": "Contractor 12", 
+    "savings_by_contractor": {
+        "series_pred": {
+            "data": [
+                1015
+            ], 
+            "name": "Predicted Yearly Savings"
+        }, 
+        "xlabels": [
+            "Contractor 12"
+        ], 
+        "series_counts": [
+            106
+        ], 
+        "series_actual": {
+            "data": [
+                82
+            ], 
+            "name": "Yearly Savings (Weather Normalized)"
+        }
+    }, 
+    "rr_timeseries": {
+        "xlabels": [
+            "Q3 2011", 
+            "Q4 2011", 
+            "Q1 2012"
+        ], 
+        "errors": [
+            [
+                0.054091787013537257, 
+                0.31581136094542839
+            ], 
+            [
+                0.41547262720690387, 
+                0.64668735082513873
+            ], 
+            [
+                0.2109880195332503, 
+                0.71591042941182037
+            ]
+        ], 
+        "rr": [
+            0.18495157397948284, 
+            0.53107998901602127, 
+            0.46344922447253534
+        ]
+    }, 
+    "rr_histogram": {
+        "xlabels": [
+            "-2.0 to -1.75", 
+            "-1.75 to -1.5", 
+            "-1.5 to -1.25", 
+            "-1.25 to -1.0", 
+            "-1.0 to -0.75", 
+            "-0.75 to -0.5", 
+            "-0.5 to -0.25", 
+            "-0.25 to 0.0", 
+            "0.0 to 0.25", 
+            "0.25 to 0.5", 
+            "0.5 to 0.75", 
+            "0.75 to 1.0", 
+            "1.0 to 1.25", 
+            "1.25 to 1.5", 
+            "1.5 to 1.75", 
+            "1.75 to 2.0"
+        ], 
+        "dataseries": {
+            "data": [
+                0, 
+                0, 
+                0, 
+                0, 
+                0, 
+                0, 
+                1, 
+                8, 
+                21, 
+                11, 
+                8, 
+                5, 
+                4, 
+                4, 
+                0, 
+                0
+            ], 
+            "name": "projects"
+        }
+    }, 
+    "counts": {
+        "total_projects": 110, 
+        "total_contractors": 1, 
+        "total_projects_rr": 67
+    }, 
+    "slug": "Contractor_12"
+}

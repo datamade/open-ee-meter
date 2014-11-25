@@ -1,0 +1,220 @@
+{
+    "savings_sums": {
+        "pred": 153366, 
+        "actual": 195010
+    }, 
+    "name": "Utility 10", 
+    "savings_by_contractor": {
+        "series_pred": {
+            "data": [
+                340, 
+                206, 
+                887, 
+                269, 
+                144, 
+                199, 
+                503, 
+                183, 
+                419, 
+                360, 
+                371, 
+                505, 
+                222, 
+                493, 
+                598, 
+                838, 
+                509, 
+                496, 
+                496, 
+                257, 
+                208, 
+                186, 
+                425, 
+                223, 
+                263, 
+                265, 
+                540, 
+                372, 
+                523, 
+                322, 
+                1637
+            ], 
+            "name": "Predicted Yearly Savings"
+        }, 
+        "xlabels": [
+            "Contractor 1", 
+            "Contractor 2", 
+            "Contractor 3", 
+            "Contractor 4", 
+            "Contractor 5", 
+            "Contractor 6", 
+            "Contractor 7", 
+            "Contractor 8", 
+            "Contractor 9", 
+            "Contractor 10", 
+            "Contractor 11", 
+            "Contractor 12", 
+            "Contractor 13", 
+            "Contractor 14", 
+            "Contractor 15", 
+            "Contractor 16", 
+            "Contractor 17", 
+            "Contractor 18", 
+            "Contractor 19", 
+            "Contractor 20", 
+            "Contractor 21", 
+            "Contractor 22", 
+            "Contractor 23", 
+            "Contractor 24", 
+            "Contractor 25", 
+            "Contractor 26", 
+            "Contractor 27", 
+            "Contractor 28", 
+            "Contractor 29", 
+            "Contractor 30", 
+            "Contractor 31"
+        ], 
+        "series_counts": [
+            4, 
+            1, 
+            1, 
+            2, 
+            1, 
+            2, 
+            1, 
+            6, 
+            3, 
+            4, 
+            10, 
+            66, 
+            8, 
+            3, 
+            8, 
+            1, 
+            6, 
+            4, 
+            2, 
+            12, 
+            1, 
+            9, 
+            10, 
+            6, 
+            9, 
+            2, 
+            1, 
+            73, 
+            2, 
+            3, 
+            1
+        ], 
+        "series_actual": {
+            "data": [
+                -131, 
+                495, 
+                609, 
+                357, 
+                142, 
+                1076, 
+                -1272, 
+                -67, 
+                -395, 
+                3246, 
+                1060, 
+                859, 
+                724, 
+                -54, 
+                577, 
+                -2452, 
+                -867, 
+                477, 
+                -87, 
+                564, 
+                750, 
+                -1033, 
+                1191, 
+                1705, 
+                2707, 
+                6979, 
+                -10374, 
+                464, 
+                3730, 
+                1704, 
+                2430
+            ], 
+            "name": "Yearly Savings (Weather Normalized)"
+        }
+    }, 
+    "rr_timeseries": {
+        "xlabels": [
+            "Q3 2011", 
+            "Q4 2011", 
+            "Q1 2012"
+        ], 
+        "errors": [
+            [
+                -0.61764208692433131, 
+                5.4155848315804871
+            ], 
+            [
+                -1.6167760360876284, 
+                1.8626337500783106
+            ], 
+            [
+                2.6453358619263634, 
+                4.9535260202855316
+            ]
+        ], 
+        "rr": [
+            2.3989713723280777, 
+            0.12292885699534115, 
+            3.7994309411059475
+        ]
+    }, 
+    "rr_histogram": {
+        "xlabels": [
+            "-400% to -350%", 
+            "-350% to -300%", 
+            "-300% to -250%", 
+            "-250% to -200%", 
+            "-200% to -150%", 
+            "-150% to -100%", 
+            "-100% to -50%", 
+            "-50% to 0%", 
+            "0% to 50%", 
+            "50% to 100%", 
+            "100% to 150%", 
+            "150% to 200%", 
+            "200% to 250%", 
+            "250% to 300%", 
+            "300% to 350%", 
+            "350% to 400%"
+        ], 
+        "dataseries": {
+            "data": [
+                1, 
+                3, 
+                5, 
+                4, 
+                5, 
+                9, 
+                15, 
+                14, 
+                18, 
+                20, 
+                15, 
+                13, 
+                10, 
+                8, 
+                7, 
+                7
+            ], 
+            "name": "projects"
+        }
+    }, 
+    "counts": {
+        "total_projects": 417, 
+        "total_contractors": 31, 
+        "total_projects_rr": 262
+    }, 
+    "slug": "Utility_10"
+}
