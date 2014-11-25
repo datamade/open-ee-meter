@@ -1,0 +1,197 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+    <title>Open EE Meter</title>
+</head>
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="row-fluid">
+                <div class="col-sm-6">
+                    <h4>Open Energy Efficiency Meter</h4>
+                    <h1>Utility A</h1>
+                </div>
+                <div class="col-sm-3">
+                    <h4>Total Projects</p>
+                    <h2 id="count-projects-all"></h2>
+                </div>
+                <div class="col-sm-3">
+                    <h4>Total Contractors</h4>
+                    <h2 id="count-contractors"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+        <div class="row-fluid">
+            <div class="col-sm-3">
+                <div class="color-box">
+                    <h4>Electricity Savings</h4>
+                    <p>PREDICTED</p>
+                    <h2><span id="elec-sum-pred"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>REALIZED</p>
+                    <h2><span id="elec-sum-actual"></span><span class="small-font">&nbspkWh</span></h2>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="color-box">
+                    <h4>Gas Savings</h4>
+                    <p>PREDICTED</p>
+                    <h2><span id="gas-sum-pred"></span><span class="small-font">&nbspthm</span></h2>
+                    <p>REALIZED</p>
+                    <h2><span id="gas-sum-actual"></span><span class="small-font">&nbspthm</span></h2>
+                </div>
+            </div>
+            <div class="col-sm-6" style="padding: 0 0 0 40">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row-fluid">
+            <div class="col-sm-7">
+                <div id="elec_rr_hist" class = "chart"></div>
+            </div>
+            <div class="col-sm-5">
+                <div id="elec_rr_timeseries" class = "chart"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <div id="elec_savings_by_contractor" class = "chart"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row-fluid">
+            <div class="col-sm-7">
+                <div id="gas_rr_hist" class = "chart"></div>
+            </div>
+            <div class="col-sm-5">
+                <div id="gas_rr_timeseries" class = "chart"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <div class="divider"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <div id="gas_savings_by_contractor" class = "chart"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/map_helper.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <script type="text/javascript" src="js/highcharts-more.js"></script>
+    <script type="text/javascript" src="js/bar_helper.js"></script>
+    <script type="text/javascript" src="js/timeseries_helper.js"></script>
+    <script type="text/javascript" src="js/hist_helper.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+
+    <script type="text/javascript">
+        function commaSeparateNumber(val){
+            while (/(\d+)(\d{3})/.test(val.toString())){
+              val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+            }
+            return val;
+          }
+
+        $.getJSON("data/finished/summary/utility_4.json", function(json) {
+            data = json;
+
+            $(document).ready(function () {
+                $('#count-projects-all').html(commaSeparateNumber(data.total_projects));
+                $('#count-contractors').html(commaSeparateNumber(data.total_contractors));
+
+
+                var map = L.map('map').setView([38, -122], 7);
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/cathyd125.k6ock5a1/{z}/{x}/{y}.png', {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18
+                    }).addTo(map);
+
+                var locations = data.latlong;
+
+                for (var i = 0; i < locations.length; i++) {
+                    jitterx = (Math.random() - .5)/50;
+                    jittery = (Math.random() - .5)/50;
+                    marker = new L.circleMarker([locations[i][0] + jitterx,locations[i][1] + jittery], {color: "#F89406"} )
+                    //.bindPopup(locations[i][0])
+                    .setRadius(1)
+                    .addTo(map);
+                }
+
+            });
+
+        }).fail(function(data){console.log('data')});
+
+        $.getJSON("data/finished/electricity_iou/utility_4.json", function(json) {
+            data = json;
+
+            $(document).ready(function () {
+            //    $('#count-projects-all').html(data.counts.total_projects);
+            //    $('#count-contractors').html(data.counts.total_contractors);
+                $('#elec-sum-pred').html(commaSeparateNumber(data.savings_sums.pred));
+                $('#elec-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
+
+                data.savings_by_contractor.series_pred.color = "#ABB7B7";
+                data.savings_by_contractor.series_actual.color = "#67D4A7";
+                data.rr_histogram.dataseries.color = "#67D4A7";
+
+                TimeseriesHelper.create("elec_rr_timeseries", "Average Electricity Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
+                BarHelper.create("elec_savings_by_contractor", "Average Electricity Savings (per project per year)", "Average Savings (kWh)", "xlabel", data.savings_by_contractor.xlabels, [data.savings_by_contractor.series_pred, data.savings_by_contractor.series_actual], "bar");
+                HistHelper.create("elec_rr_hist", "Distribution of Electricity Realization Rates", "Number of Projects", "Realization Rate (actual savings relative to predicted savings)", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
+
+            });
+
+        }).fail(function(data){console.log('data')});
+        
+        $.getJSON("data/finished/gas_iou/utility_4.json", function(json) {
+            data = json;
+
+            $(document).ready(function () {
+            //    $('#count-projects-all').html(data.counts.total_projects);
+            //    $('#count-contractors').html(data.counts.total_contractors);
+                $('#gas-sum-pred').html(commaSeparateNumber(data.savings_sums.pred));
+                $('#gas-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
+
+                data.savings_by_contractor.series_pred.color = "#ABB7B7";
+                data.savings_by_contractor.series_actual.color = "#67D4A7";
+                data.rr_histogram.dataseries.color = "#67D4A7";
+
+                TimeseriesHelper.create("gas_rr_timeseries", "Average Gas Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
+                BarHelper.create("gas_savings_by_contractor", "Average Gas Savings (per project per year)", "Average Savings (thm)", "xlabel", data.savings_by_contractor.xlabels, [data.savings_by_contractor.series_pred, data.savings_by_contractor.series_actual], "bar");
+                HistHelper.create("gas_rr_hist", "Distribution of Gas Realization Rates", "Number of Projects", "Realization Rate (actual savings relative to predicted savings)", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
+            });
+
+        }).fail(function(data){console.log('data')});
+
+
+    </script>
+
+</body>
