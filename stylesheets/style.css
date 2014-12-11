@@ -1,5 +1,5 @@
 .container{
-    padding: 20px;
+    padding: 10px;
 }
 
 body{
@@ -10,7 +10,7 @@ body{
 
 .navbar h1{
     color: #F2F1EF;
-    margin: 0 0 0 0;
+    margin: 30 0 0 150;
 
 }
 .navbar h2{
@@ -20,6 +20,14 @@ body{
 }
 .navbar h4{
     color: #A9A9A7;
+}
+
+.logo{
+    float: left;
+}
+
+.logo img{
+    display:block;
 }
 
 .color-box{
