@@ -15,7 +15,7 @@
                     <div class="logo">
                         <img src="logo.png"></img>
                     </div>
-                    <h1>Utility X</h1>
+                    <h1>Portfolio X</h1>
                 </div>
                 <div class="col-sm-3">
                     <h4>Total Projects</p>
@@ -162,8 +162,8 @@
                 $('#elec-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
 
                 data.savings_by_contractor.series_pred.color = "#ABB7B7";
-                data.savings_by_contractor.series_actual.color = "#67D4A7";
-                data.rr_histogram.dataseries.color = "#67D4A7";
+                data.savings_by_contractor.series_actual.color = "#1186BB";
+                data.rr_histogram.dataseries.color = "#1186BB";
 
                 TimeseriesHelper.create("elec_rr_timeseries", "Average Electricity Realization Rate (By Project End Date)", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
                 BarHelper.create("elec_savings_by_contractor", "Average Electricity Savings (per project per year)", "Average Savings (kWh)", "xlabel", data.savings_by_contractor.xlabels, [data.savings_by_contractor.series_pred, data.savings_by_contractor.series_actual], "bar");
@@ -183,8 +183,8 @@
                 $('#gas-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
 
                 data.savings_by_contractor.series_pred.color = "#ABB7B7";
-                data.savings_by_contractor.series_actual.color = "#67D4A7";
-                data.rr_histogram.dataseries.color = "#67D4A7";
+                data.savings_by_contractor.series_actual.color = "#1186BB";
+                data.rr_histogram.dataseries.color = "#1186BB";
 
                 TimeseriesHelper.create("gas_rr_timeseries", "Average Gas Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
                 BarHelper.create("gas_savings_by_contractor", "Average Gas Savings (per project per year)", "Average Savings (thm)", "xlabel", data.savings_by_contractor.xlabels, [data.savings_by_contractor.series_pred, data.savings_by_contractor.series_actual], "bar");

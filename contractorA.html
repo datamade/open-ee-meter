@@ -139,8 +139,8 @@
                 $('#elec-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
 
                 data.savings_by_contractor.series_pred.color = "#ABB7B7";
-                data.savings_by_contractor.series_actual.color = "#67D4A7";
-                data.rr_histogram.dataseries.color = "#67D4A7";
+                data.savings_by_contractor.series_actual.color = "#1186BB";
+                data.rr_histogram.dataseries.color = "#1186BB";
 
                 TimeseriesHelper.create("elec_rr_timeseries", "Average Electricity Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
                 HistHelper.create("elec_rr_hist", "Distribution of Electricity Realization Rates", "Projects", "Realization Rate", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
@@ -159,8 +159,8 @@
                 $('#gas-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
 
                 data.savings_by_contractor.series_pred.color = "#ABB7B7";
-                data.savings_by_contractor.series_actual.color = "#67D4A7";
-                data.rr_histogram.dataseries.color = "#67D4A7";
+                data.savings_by_contractor.series_actual.color = "#1186BB";
+                data.rr_histogram.dataseries.color = "#1186BB";
 
                 TimeseriesHelper.create("gas_rr_timeseries", "Average Gas Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
                 HistHelper.create("gas_rr_hist", "Distribution of Gas Realization Rates", "Projects", "Realization Rate", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);

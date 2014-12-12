@@ -31,16 +31,18 @@ body{
 }
 
 .color-box{
-    background-color: #92E0C0;
+    background-color: #1186BB;
     border: 2 2 2 2;
     padding: 0 0 20 0;
 }
 .color-box h2{
     margin:0 0 10 15;
+    color: #F2F1EF;
 }
 .color-box h4{
     display: block;
-    background-color: #67D4A7;
+    color: #F2F1EF;
+    background-color: #0273A2;
     margin: 0 0 10 0;
     padding: 8 15 8 15;
 }
@@ -49,6 +51,7 @@ body{
 }
 .color-box p{
     margin: 20 0 10 15;
+    color: #F2F1EF;
 }
 .divider{
     height:30px;

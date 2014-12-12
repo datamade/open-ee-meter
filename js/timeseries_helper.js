@@ -32,7 +32,7 @@ TimeseriesHelper.create = function(element_id, title, yaxisLabel, xaxisLabel, xC
         },
       series: [{
         name: yaxisLabel,
-        color: "#67D4A7",
+        color: "#1186BB",
         type: 'spline',
         data: dataseries,
         tooltip: {
