@@ -25,6 +25,9 @@ utility_dict = {
         }
 }
 
+# this shouldn't be hardcoded
+today = pd.to_datetime('12/15/2014')
+
 def getBuckets(freq, cutoffs):
     buckets = []
     for i in range(len(freq)):
@@ -81,6 +84,8 @@ for utility_type in utility_dict:
     iou_names = utility_dict[utility_type]["utility_names"]
     actual_col = utility_dict[utility_type]["actual_col"]
     pred_col = utility_dict[utility_type]["pred_col"]
+    gross_actual = 'gross_'+actual_col
+    gross_pred = 'gross_'+pred_col
 
     all_projects = merged[['project_id', 'contractor', utility_type, actual_col, pred_col, 'retrofit_end_date']]
     all_projects['realization_rate'] = all_projects[actual_col]/all_projects[pred_col]
@@ -172,6 +177,19 @@ for utility_type in utility_dict:
         sum_pred = utility_data_all[pred_col].sum()
         utility_json['savings_sums']['actual']= int(sum_actual)
         utility_json['savings_sums']['pred']= int(sum_pred)
+
+        ###########################################
+        # prep gross savings ######################
+        ###########################################
+        utility_data_clean['duration'] = (today - utility_data_clean['date'])/numpy.timedelta64(1, 'D')
+        utility_data_clean[gross_actual] = utility_data_clean['duration'] * utility_data_clean[actual_col]/365
+        utility_data_clean[gross_pred] = utility_data_clean['duration'] * utility_data_clean[pred_col]/365
+        sum_gross_actual = utility_data_clean[gross_actual].sum()
+        sum_gross_pred = utility_data_clean[gross_pred].sum()
+        utility_json['savings_sums']['gross_actual'] = int(sum_gross_actual)
+        utility_json['savings_sums']['gross_pred'] = int(sum_gross_pred)
+        utility_json['savings_sums']['portfolio_rr'] = int(sum_gross_actual/sum_gross_pred*100)
+
 
         ###########################################
         # prep savings by contractor ##############

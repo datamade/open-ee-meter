@@ -34,25 +34,29 @@
     <div class="container">
 
         <div class="row-fluid">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="color-box">
                     <h4>Electricity Savings</h4>
-                    <p>PREDICTED</p>
-                    <h2><span id="elec-sum-pred"></span><span class="small-font">&nbspkWh</span></h2>
-                    <p>REALIZED</p>
-                    <h2><span id="elec-sum-actual"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>GROSS SAVINGS</p>
+                    <h2><span id="elec-sum-gross"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>PREDICTED SAVINGS</p>
+                    <h2><span id="elec-sum-gross-pred"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>PORTFOLIO REALIZATION RATE</p>
+                    <h2><span id="elec-portfolio-rr"></span><span class="small-font">&nbsp%</span></h2>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="color-box">
                     <h4>Gas Savings</h4>
-                    <p>PREDICTED</p>
-                    <h2><span id="gas-sum-pred"></span><span class="small-font">&nbspthm</span></h2>
-                    <p>REALIZED</p>
-                    <h2><span id="gas-sum-actual"></span><span class="small-font">&nbspthm</span></h2>
+                    <p>GROSS SAVINGS</p>
+                    <h2><span id="gas-sum-gross"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>PREDICTED SAVINGS</p>
+                    <h2><span id="gas-sum-gross-pred"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>PORTFOLIO REALIZATION RATE</p>
+                    <h2><span id="gas-portfolio-rr"></span><span class="small-font">&nbsp%</span></h2>
                 </div>
             </div>
-            <div class="col-sm-6" style="padding: 0 0 0 40">
+            <div class="col-sm-4" style="padding: 0 0 0 20">
                 <div id="map"></div>
             </div>
         </div>
@@ -156,10 +160,9 @@
             data = json;
 
             $(document).ready(function () {
-            //    $('#count-projects-all').html(data.counts.total_projects);
-            //    $('#count-contractors').html(data.counts.total_contractors);
-                $('#elec-sum-pred').html(commaSeparateNumber(data.savings_sums.pred));
-                $('#elec-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
+                $('#elec-sum-gross').html(commaSeparateNumber(data.savings_sums.gross_actual));
+                $('#elec-sum-gross-pred').html(commaSeparateNumber(data.savings_sums.gross_pred));
+                $('#elec-portfolio-rr').html(commaSeparateNumber(data.savings_sums.portfolio_rr));
 
                 data.savings_by_contractor.series_pred.color = "#ABB7B7";
                 data.savings_by_contractor.series_actual.color = "#1186BB";
@@ -177,10 +180,9 @@
             data = json;
 
             $(document).ready(function () {
-            //    $('#count-projects-all').html(data.counts.total_projects);
-            //    $('#count-contractors').html(data.counts.total_contractors);
-                $('#gas-sum-pred').html(commaSeparateNumber(data.savings_sums.pred));
-                $('#gas-sum-actual').html(commaSeparateNumber(data.savings_sums.actual));
+                $('#gas-sum-gross').html(commaSeparateNumber(data.savings_sums.gross_actual));
+                $('#gas-sum-gross-pred').html(commaSeparateNumber(data.savings_sums.gross_pred));
+                $('#gas-portfolio-rr').html(commaSeparateNumber(data.savings_sums.portfolio_rr));
 
                 data.savings_by_contractor.series_pred.color = "#ABB7B7";
                 data.savings_by_contractor.series_actual.color = "#1186BB";

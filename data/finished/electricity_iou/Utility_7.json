@@ -1,7 +1,10 @@
 {
     "savings_sums": {
         "pred": 39104, 
-        "actual": 45980
+        "gross_pred": 83212, 
+        "portfolio_rr": 136, 
+        "actual": 45980, 
+        "gross_actual": 113694
     }, 
     "name": "Utility 7", 
     "savings_by_contractor": {
