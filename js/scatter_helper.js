@@ -1,5 +1,5 @@
 var ScatterHelper = {};
-ScatterHelper.create = function(element_id, title, yaxisLabel, xaxisLabel, dataseries) {
+ScatterHelper.create = function(element_id, title, yaxisLabel, xaxisLabel, dataseries, plotmax) {
 
   return new Highcharts.Chart({
 
@@ -60,7 +60,16 @@ ScatterHelper.create = function(element_id, title, yaxisLabel, xaxisLabel, datas
             }
         }
     },
-    series: dataseries
+    series: [{
+            type: 'spline',
+            color: '#1186BB',
+            name: '100% Realization',
+            data: [[0, 0], [plotmax, plotmax]],
+            marker: {
+                enabled: false
+            },
+            enableMouseTracking: false
+            }, dataseries[0], dataseries[1], dataseries[2]]
 
   });
 

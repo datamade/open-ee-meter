@@ -195,13 +195,13 @@ for utility_type in utility_dict:
         ###########################################
         utility_json['savings_scatter'] = {}
         savings_series_realized = {  'name': 'Savings Realized',
-                            'color': 'rgba(28, 201, 99, .5)',
+                            'color': 'rgba(0, 177, 106, .5)',
                             'data': []}
         savings_series_notrealized = {  'name': 'Savings Not Realized',
-                            'color': 'rgba(201, 150, 35, .5)',
+                            'color': 'rgba(232, 126, 4, .5)',
                             'data': []}
         savings_series_neg = {  'name': 'Negative Savings',
-                            'color': 'rgba(201, 56, 46, .5)',
+                            'color': 'rgba(150, 40, 27, .5)',
                             'data': []}
         for row in utility_data_clean.iterrows():
             actual_val = int(row[1][actual_col])
@@ -212,6 +212,10 @@ for utility_type in utility_dict:
                 savings_series_notrealized['data'].append([pred_val, actual_val])
             else:
                 savings_series_realized['data'].append([pred_val, actual_val])
+        if utility_data_clean[actual_col].max() > utility_data_clean[pred_col].max():
+            utility_json['savings_scatter']['plotmax'] = utility_data_clean[pred_col].max()
+        else:
+            utility_json['savings_scatter']['plotmax'] = utility_data_clean[actual_col].max()
         utility_json['savings_scatter']['dataseries'] = [savings_series_realized, savings_series_notrealized, savings_series_neg]
 
 

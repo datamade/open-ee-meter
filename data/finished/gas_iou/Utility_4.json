@@ -349,9 +349,10 @@
         }
     }, 
     "savings_scatter": {
+        "plotmax": 1485.7513570000001, 
         "dataseries": [
             {
-                "color": "rgba(28, 201, 99, .5)", 
+                "color": "rgba(0, 177, 106, .5)", 
                 "data": [
                     [
                         335, 
@@ -617,7 +618,7 @@
                 "name": "Savings Realized"
             }, 
             {
-                "color": "rgba(201, 150, 35, .5)", 
+                "color": "rgba(232, 126, 4, .5)", 
                 "data": [
                     [
                         2643, 
@@ -2631,7 +2632,7 @@
                 "name": "Savings Not Realized"
             }, 
             {
-                "color": "rgba(201, 56, 46, .5)", 
+                "color": "rgba(150, 40, 27, .5)", 
                 "data": [
                     [
                         4523, 

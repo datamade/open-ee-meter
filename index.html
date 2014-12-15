@@ -146,7 +146,7 @@
                 for (var i = 0; i < locations.length; i++) {
                     jitterx = (Math.random() - .5)/50;
                     jittery = (Math.random() - .5)/50;
-                    marker = new L.circleMarker([locations[i][0] + jitterx,locations[i][1] + jittery], {color: "#1cc963"} )
+                    marker = new L.circleMarker([locations[i][0] + jitterx,locations[i][1] + jittery], {color: "#00b16a"} )
                     //.bindPopup(locations[i][0])
                     .setRadius(1)
                     .addTo(map);
@@ -168,7 +168,7 @@
 
                 TimeseriesHelper.create("elec_rr_timeseries", "Average Electricity Realization Rate (By Project End Date)", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
                 HistHelper.create("elec_rr_hist", "Distribution of Electricity Realization Rates", "Projects", "Realization Rate", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
-                ScatterHelper.create("elec_savings_scatter", "Yearly Electricity Savings: Actual vs. Predicted Yearly Savings", "Yearly Weather Normalized Savings (kWh)", "Predicted Yearly Savings (kWh)", data.savings_scatter.dataseries)
+                ScatterHelper.create("elec_savings_scatter", "Yearly Electricity Savings: Actual vs. Predicted Yearly Savings", "Yearly Weather Normalized Savings (kWh)", "Predicted Yearly Savings (kWh)", data.savings_scatter.dataseries, data.savings_scatter.plotmax)
 
             });
 
@@ -186,7 +186,7 @@
 
                 TimeseriesHelper.create("gas_rr_timeseries", "Average Gas Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
                 HistHelper.create("gas_rr_hist", "Distribution of Gas Realization Rates", "Projects", "Realization Rate", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
-                ScatterHelper.create("gas_savings_scatter", "Yearly Gas Savings: Actual vs. Predicted", "Yearly Weather Normalized Savings (therm)", "Predicted Yearly Savings (therm)", data.savings_scatter.dataseries)
+                ScatterHelper.create("gas_savings_scatter", "Yearly Gas Savings: Actual vs. Predicted", "Yearly Weather Normalized Savings (therm)", "Predicted Yearly Savings (therm)", data.savings_scatter.dataseries, data.savings_scatter.plotmax)
             });
 
         }).fail(function(data){console.log('data')});
