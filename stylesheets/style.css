@@ -6,7 +6,7 @@ body{
     background-image: url("../subtlenet2.png");
 }
 
-#map { height: 300px; }
+#map { height: 322px; }
 
 .navbar h1{
     color: #F2F1EF;
@@ -31,13 +31,13 @@ body{
 }
 
 .color-box{
-    background-color: #1186BB;
+    background-color: #A3CEE4;
     border: 2 2 2 2;
     padding: 0 0 20 0;
 }
 .color-box h2{
     margin:0 0 10 15;
-    color: #F2F1EF;
+    color: #333333;//#F2F1EF;
 }
 .color-box h4{
     display: block;
@@ -51,7 +51,7 @@ body{
 }
 .color-box p{
     margin: 20 0 10 15;
-    color: #F2F1EF;
+    color: #333333; //#F2F1EF;
 }
 .divider{
     height:30px;

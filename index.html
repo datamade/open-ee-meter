@@ -80,7 +80,7 @@
         </div>
         <div class="row-fluid">
             <div class="col-sm-12">
-                <div id="elec_savings_by_contractor" class = "chart"></div>
+                <div id="elec_savings_scatter" class = "chart"></div>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@
         </div>
         <div class="row-fluid">
             <div class="col-sm-12">
-                <div id="gas_savings_by_contractor" class = "chart"></div>
+                <div id="gas_savings_scatter" class = "chart"></div>
             </div>
         </div>
     </div>
@@ -111,12 +111,11 @@
 
 
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/map_helper.js"></script>
     <script type="text/javascript" src="js/highcharts.js"></script>
     <script type="text/javascript" src="js/highcharts-more.js"></script>
-    <script type="text/javascript" src="js/bar_helper.js"></script>
     <script type="text/javascript" src="js/timeseries_helper.js"></script>
     <script type="text/javascript" src="js/hist_helper.js"></script>
+    <script type="text/javascript" src="js/scatter_helper.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
 
@@ -147,7 +146,7 @@
                 for (var i = 0; i < locations.length; i++) {
                     jitterx = (Math.random() - .5)/50;
                     jittery = (Math.random() - .5)/50;
-                    marker = new L.circleMarker([locations[i][0] + jitterx,locations[i][1] + jittery], {color: "#F89406"} )
+                    marker = new L.circleMarker([locations[i][0] + jitterx,locations[i][1] + jittery], {color: "#1cc963"} )
                     //.bindPopup(locations[i][0])
                     .setRadius(1)
                     .addTo(map);
@@ -165,13 +164,11 @@
                 $('#elec-sum-gross-pred').html(commaSeparateNumber(data.savings_sums.gross_pred));
                 $('#elec-portfolio-rr').html(commaSeparateNumber(data.savings_sums.portfolio_rr));
 
-                data.savings_by_contractor.series_pred.color = "#ABB7B7";
-                data.savings_by_contractor.series_actual.color = "#1186BB";
                 data.rr_histogram.dataseries.color = "#1186BB";
 
                 TimeseriesHelper.create("elec_rr_timeseries", "Average Electricity Realization Rate (By Project End Date)", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
-                BarHelper.create("elec_savings_by_contractor", "Average Electricity Savings (per project per year)", "Average Savings (kWh)", "xlabel", data.savings_by_contractor.xlabels, [data.savings_by_contractor.series_pred, data.savings_by_contractor.series_actual], "bar");
                 HistHelper.create("elec_rr_hist", "Distribution of Electricity Realization Rates", "Projects", "Realization Rate", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
+                ScatterHelper.create("elec_savings_scatter", "Yearly Electricity Savings: Actual vs. Predicted Yearly Savings", "Yearly Weather Normalized Savings (kWh)", "Predicted Yearly Savings (kWh)", data.savings_scatter.dataseries)
 
             });
 
@@ -185,13 +182,11 @@
                 $('#gas-sum-gross-pred').html(commaSeparateNumber(data.savings_sums.gross_pred));
                 $('#gas-portfolio-rr').html(commaSeparateNumber(data.savings_sums.portfolio_rr));
 
-                data.savings_by_contractor.series_pred.color = "#ABB7B7";
-                data.savings_by_contractor.series_actual.color = "#1186BB";
                 data.rr_histogram.dataseries.color = "#1186BB";
 
                 TimeseriesHelper.create("gas_rr_timeseries", "Average Gas Realization Rate", "Average Realization Rate", "Retrofit End Date", data.rr_timeseries.xlabels, data.rr_timeseries.rr, data.rr_timeseries.errors);
-                BarHelper.create("gas_savings_by_contractor", "Average Gas Savings (per project per year)", "Average Savings (thm)", "xlabel", data.savings_by_contractor.xlabels, [data.savings_by_contractor.series_pred, data.savings_by_contractor.series_actual], "bar");
                 HistHelper.create("gas_rr_hist", "Distribution of Gas Realization Rates", "Projects", "Realization Rate", data.rr_histogram.xlabels, [data.rr_histogram.dataseries]);
+                ScatterHelper.create("gas_savings_scatter", "Yearly Gas Savings: Actual vs. Predicted", "Yearly Weather Normalized Savings (therm)", "Predicted Yearly Savings (therm)", data.savings_scatter.dataseries)
             });
 
         }).fail(function(data){console.log('data')});

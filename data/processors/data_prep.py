@@ -190,6 +190,31 @@ for utility_type in utility_dict:
         utility_json['savings_sums']['gross_pred'] = int(sum_gross_pred)
         utility_json['savings_sums']['portfolio_rr'] = int(sum_gross_actual/sum_gross_pred*100)
 
+        ###########################################
+        # prep actual vs pred savings scatterplot #
+        ###########################################
+        utility_json['savings_scatter'] = {}
+        savings_series_realized = {  'name': 'Savings Realized',
+                            'color': 'rgba(28, 201, 99, .5)',
+                            'data': []}
+        savings_series_notrealized = {  'name': 'Savings Not Realized',
+                            'color': 'rgba(201, 150, 35, .5)',
+                            'data': []}
+        savings_series_neg = {  'name': 'Negative Savings',
+                            'color': 'rgba(201, 56, 46, .5)',
+                            'data': []}
+        for row in utility_data_clean.iterrows():
+            actual_val = int(row[1][actual_col])
+            pred_val = int(row[1][pred_col])
+            if actual_val < 0:
+                savings_series_neg['data'].append([pred_val, actual_val])
+            elif row[1][actual_col] < row[1][pred_col]:
+                savings_series_notrealized['data'].append([pred_val, actual_val])
+            else:
+                savings_series_realized['data'].append([pred_val, actual_val])
+        utility_json['savings_scatter']['dataseries'] = [savings_series_realized, savings_series_notrealized, savings_series_neg]
+
+
 
         ###########################################
         # prep savings by contractor ##############
