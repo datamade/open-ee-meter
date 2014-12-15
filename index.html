@@ -35,30 +35,27 @@
     <div class="container">
 
         <div class="row-fluid">
-            <div class="col-sm-4">
-                <div class="color-box">
-                    <h4>Electricity Savings</h4>
-                    <p>GROSS SAVINGS</p>
-                    <h2><span id="elec-sum-gross"></span><span class="small-font">&nbspkWh</span></h2>
-                    <p>PREDICTED SAVINGS</p>
-                    <h2><span id="elec-sum-gross-pred"></span><span class="small-font">&nbspkWh</span></h2>
-                    <p>PORTFOLIO REALIZATION RATE</p>
-                    <h2><span id="elec-portfolio-rr"></span><span class="small-font">&nbsp%</span></h2>
+            <div class="col-sm-7">
+                <div class="gross-savings-box">
+                    <h4>Gross Savings To Date</h4>
+                    <div class="col-sm-6">
+                        <p>ELECTRICITY</p>
+                        <h1><span class="elec-sum-gross emphasis-gross"></span><span class="small-font">&nbspkWh</span></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>GAS</p>
+                        <h1><span class="gas-sum-gross emphasis-gross"></span><span class="small-font">&nbsptherm</span></h1>
+                    </div>
+                    <p>&nbsp</p>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="color-box">
-                    <h4>Gas Savings</h4>
-                    <p>GROSS SAVINGS</p>
-                    <h2><span id="gas-sum-gross"></span><span class="small-font">&nbspkWh</span></h2>
-                    <p>PREDICTED SAVINGS</p>
-                    <h2><span id="gas-sum-gross-pred"></span><span class="small-font">&nbspkWh</span></h2>
-                    <p>PORTFOLIO REALIZATION RATE</p>
-                    <h2><span id="gas-portfolio-rr"></span><span class="small-font">&nbsp%</span></h2>
-                </div>
-            </div>
-            <div class="col-sm-4" style="padding: 0 0 0 20">
+            <div class="col-sm-5" style="padding: 0 0 0 20">
                 <div id="map"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <div class="divider"></div>
             </div>
         </div>
     </div>
@@ -66,11 +63,19 @@
 
     <div class="container">
         <div class="row-fluid">
-            <div class="col-sm-7">
-                <div id="elec_rr_hist" class = "chart"></div>
+            <div class="col-sm-4">
+                <div class="color-box">
+                    <h4>Electricity Savings</h4>
+                    <p>PORTFOLIO REALIZATION RATE</p>
+                    <h2><span id="elec-portfolio-rr" class='emphasis-rr'></span><span class='emphasis-rr'>&nbsp%</span></h2>
+                    <p>ACTUAL SAVINGS</p>
+                    <h2><span class="elec-sum-gross"></span><span class="small-font">&nbspkWh</span></h2>
+                    <p>PREDICTED SAVINGS</p>
+                    <h2><span id="elec-sum-gross-pred"></span><span class="small-font">&nbspkWh</span></h2>
+                </div>
             </div>
-            <div class="col-sm-5">
-                <div id="elec_rr_timeseries" class = "chart"></div>
+            <div class="col-sm-8">
+                <div id="elec_savings_scatter" class = "chart"></div>
             </div>
         </div>
         <div class="row-fluid">
@@ -79,14 +84,38 @@
             </div>
         </div>
         <div class="row-fluid">
-            <div class="col-sm-8">
-                <div id="elec_savings_scatter" class = "chart"></div>
+            <div class="col-sm-7">
+                <div id="elec_rr_hist" class = "chart"></div>
+            </div>
+            <div class="col-sm-5">
+                <div id="elec_rr_timeseries" class = "chart"></div>
             </div>
         </div>
     </div>
 
 
     <div class="container">
+        <div class="row-fluid">
+            <div class="col-sm-4">
+                <div class="color-box">
+                    <h4>Gas Savings</h4>
+                    <p>PORTFOLIO REALIZATION RATE</p>
+                    <h2><span id="gas-portfolio-rr" class='emphasis-rr'></span><span class='emphasis-rr'>%</span></h2>
+                    <p>ACTUAL SAVINGS</p>
+                    <h2><span class="gas-sum-gross"></span><span class="small-font">&nbsptherm</span></h2>
+                    <p>PREDICTED SAVINGS</p>
+                    <h2><span id="gas-sum-gross-pred"></span><span class="small-font">&nbsptherm</span></h2>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div id="gas_savings_scatter" class = "chart"></div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="col-sm-12">
+                <div class="divider"></div>
+            </div>
+        </div>
         <div class="row-fluid">
             <div class="col-sm-7">
                 <div id="gas_rr_hist" class = "chart"></div>
@@ -98,11 +127,6 @@
         <div class="row-fluid">
             <div class="col-sm-12">
                 <div class="divider"></div>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="col-sm-8">
-                <div id="gas_savings_scatter" class = "chart"></div>
             </div>
         </div>
     </div>
@@ -160,7 +184,7 @@
             data = json;
 
             $(document).ready(function () {
-                $('#elec-sum-gross').html(commaSeparateNumber(data.savings_sums.gross_actual));
+                $('.elec-sum-gross').html(commaSeparateNumber(data.savings_sums.gross_actual));
                 $('#elec-sum-gross-pred').html(commaSeparateNumber(data.savings_sums.gross_pred));
                 $('#elec-portfolio-rr').html(commaSeparateNumber(data.savings_sums.portfolio_rr));
 
@@ -178,7 +202,7 @@
             data = json;
 
             $(document).ready(function () {
-                $('#gas-sum-gross').html(commaSeparateNumber(data.savings_sums.gross_actual));
+                $('.gas-sum-gross').html(commaSeparateNumber(data.savings_sums.gross_actual));
                 $('#gas-sum-gross-pred').html(commaSeparateNumber(data.savings_sums.gross_pred));
                 $('#gas-portfolio-rr').html(commaSeparateNumber(data.savings_sums.portfolio_rr));
 

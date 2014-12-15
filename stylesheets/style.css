@@ -6,7 +6,7 @@ body{
     background-image: url("../subtlenet2.png");
 }
 
-#map { height: 322px; }
+#map { height: 231px; }
 
 .navbar h1{
     color: #F2F1EF;
@@ -30,9 +30,41 @@ body{
     display:block;
 }
 
-.color-box{
+.gross-savings-box{
     background-color: #A3CEE4;
-    border: 2 2 2 2;
+    padding: 0 0 20 0;
+}
+.gross-savings-box h4{
+    display: block;
+    color: #F2F1EF;
+    background-color: #0273A2;
+    margin: 0 0 10 0;
+    padding: 8 15 8 15;
+}
+.gross-savings-box p{
+    margin: 20 0 10 15;
+    color: #333333;
+    font-size: 20px;
+}
+.gross-savings-box h1{
+    margin: 20 0 10 15;
+    color: #333333;
+    font-size: 46px;
+}
+
+.emphasis-gross{
+    font-weight: bold;
+}
+.emphasis-rr{
+    color: #0273A2;
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.color-box{
+    background-color: white;
+    border: 3px solid;
+    border-color: #0273A2;
     padding: 0 0 20 0;
 }
 .color-box h2{
