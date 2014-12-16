@@ -18,7 +18,10 @@ HistHelper.create = function(element_id, title, yaxisLabel, xaxisLabel, xCategor
       xAxis: {
           categories: xCategories,
           labels: {
-                rotation: 270
+                rotation: 315,
+                formatter: function () {
+                    return this.value.replace(/( to).*/, "");
+                }
             },
           title: {
                 text: "Realization Rate (actual savings relative to predicted savings)"
