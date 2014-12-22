@@ -25,4 +25,4 @@ savings.contractor = savings.contractor.map(contractor_dict)
 savings.electricity_iou = savings.electricity_iou.map(utility_dict)
 savings.gas_iou = savings.gas_iou.map(utility_dict)
 
-savings.to_csv( "data/raw/anon_savings.csv", index=False)
+savings.to_csv( "data/raw/savings.csv", index=False)

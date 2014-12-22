@@ -18,10 +18,10 @@ all: $(GENERATED)
 
 
 # clean savings
-anon_savings_clean.csv: anon_savings.csv
+anon_savings_clean.csv: savings.csv
 	@echo "Cleaning savings raw file"
-	@csvclean raw/anon_savings.csv
-	@mv raw/anon_savings_out.csv build/anon_savings_clean.csv
+	@csvclean raw/savings.csv
+	@mv raw/savings_out.csv build/anon_savings_clean.csv
 
 # clean projects
 projects_clean.csv: projects_additional_info.csv
