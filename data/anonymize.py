@@ -1,6 +1,6 @@
 import pandas as pd
 
-raw_data = "data/raw/caltest_savings.csv"
+raw_data = "raw/FILENAME.csv" #file to be anonymized
 
 savings = pd.read_csv( raw_data )
 

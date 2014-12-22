@@ -164,7 +164,7 @@
                 $('#count-contractors').html(commaSeparateNumber(data.total_contractors));
 
 
-                var map = L.map('map').setView([{{page.map_lat}},{{page.map_long}}], {{page.map_zoom}});
+                var map = L.map('map', {scrollWheelZoom:false}).setView([{{page.map_lat}},{{page.map_long}}], {{page.map_zoom}});
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/cathyd125.k6ock5a1/{z}/{x}/{y}.png', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
