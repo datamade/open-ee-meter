@@ -6,4 +6,4 @@ csv2 = pd.read_csv( sys.argv[2] )
 
 merged = csv1.merge(csv2, on=sys.argv[3])
 
-merged.to_csv("build/caltrack_merged.csv", index=False)
+merged.to_csv("build/merged.csv", index=False)

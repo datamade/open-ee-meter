@@ -5,8 +5,8 @@ import json
 import re
 import os
 
-projects = pd.read_csv( "build/caltrack_merged.csv")
-loc = pd.read_csv( "build/caltest_latlong_clean.csv")
+projects = pd.read_csv( "build/merged.csv")
+loc = pd.read_csv( "build/latlong_clean.csv")
 
 merged = projects.merge(loc, on="zipcode")
 
