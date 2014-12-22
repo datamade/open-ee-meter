@@ -14,6 +14,50 @@ The absence of timely evaluation prevents ongoing comparisons of various program
 - [Highcharts](http://www.highcharts.com/)
 - [Bootstrap](http://getbootstrap.com/)
 
+### How to use
+
+#### Adding Data
+Put raw data (in csv form) in ```data/raw/```
+
+There should be three raw data files:
+
+1. **savings.csv** - actual & predicted savings for energy savings projects  
+     note: if you want to create an anonymized savings.csv file from non-anonymized data, use anonymize.py
+     required columns:  
+     - project_id
+     - contractor
+     - electricity_iou
+     - gas_iou
+     - weather\_normalized\_yearly\_kwh\_savings
+     - weather\_normalized\_yearly\_therm\_savings
+     - predicted\_yearly\_kwh\_savings
+     - predicted\_yearly\_therm\_savings
+2. **projects\_additional\_info.csv** - additional info on energy savings projects    
+     required columns:  
+     - project_id
+     - zipcode
+     - retrofit\_start\_date
+     - retrofit\_end\_date
+3. **zipcode\_to\_lat\_lng.csv** - a mapping of zipcodes to their lat/long center    
+     required columns:  
+     - zipcode
+     - lat
+     - lng  
+
+#### Processing Data
+To prepare and process the data for the open-ee-meter:
+```
+cd data
+make all
+```
+This will create the ```build/``` & ```finished/``` directories. To clean the ```build/``` & ```finished/``` directories, run ```make full_clean```
+
+#### Running Locally
+This is a jekyll site. To run it locally:
+```
+jekyll serve
+```
+
 ### Errors / Bugs
 
 If something is not behaving intuitively, it is a bug, and should be reported.
