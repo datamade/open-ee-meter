@@ -25,11 +25,13 @@ contractor_dict = {
         }
     }
 
+# this shouldn't be hardcoded
+today = pd.to_datetime('12/15/2014')
 
 def getBuckets(freq, cutoffs):
     buckets = []
     for i in range(len(freq)):
-        bucket = str(cutoffs[i])+' to '+str(cutoffs[i+1])
+        bucket = str(int(cutoffs[i]*100))+'% to '+str(int(cutoffs[i+1]*100))+'%'
         buckets.append(bucket)
     return buckets
 
@@ -76,6 +78,8 @@ for utility_type in contractor_dict:
     contractor_names = contractor_dict[utility_type]["contractor_names"]
     actual_col = contractor_dict[utility_type]["actual_col"]
     pred_col = contractor_dict[utility_type]["pred_col"]
+    gross_actual = 'gross_'+actual_col
+    gross_pred = 'gross_'+pred_col
 
     all_projects = merged[['project_id', 'contractor', utility_type, actual_col, pred_col, 'retrofit_end_date']]
     all_projects['realization_rate'] = all_projects[actual_col]/all_projects[pred_col]
@@ -171,48 +175,46 @@ for utility_type in contractor_dict:
         utility_json['savings_sums']['pred']= int(sum_pred)
 
         ###########################################
-        # prep savings by contractor ##############
+        # prep gross savings ######################
         ###########################################
-        utility_json['savings_by_contractor'] = {}
-        utility_json['savings_by_contractor']['series_pred'] = {}
-        utility_json['savings_by_contractor']['series_pred']['name'] = "Predicted Yearly Savings"
-        utility_json['savings_by_contractor']['series_pred']['data'] = []
-        utility_json['savings_by_contractor']['series_actual'] = {}
-        utility_json['savings_by_contractor']['series_actual']['name'] = 'Yearly Savings (Weather Normalized)'
-        utility_json['savings_by_contractor']['series_actual']['data'] = []
-        utility_json['savings_by_contractor']['xlabels'] = []
-        utility_json['savings_by_contractor']['series_counts'] = []
+        utility_data_clean['duration'] = (today - utility_data_clean['date'])/numpy.timedelta64(1, 'D')
+        utility_data_clean[gross_actual] = utility_data_clean['duration'] * utility_data_clean[actual_col]/365
+        utility_data_clean[gross_pred] = utility_data_clean['duration'] * utility_data_clean[pred_col]/365
+        sum_gross_actual = utility_data_clean[gross_actual].sum()
+        sum_gross_pred = utility_data_clean[gross_pred].sum()
+        utility_json['savings_sums']['gross_actual'] = int(sum_gross_actual)
+        utility_json['savings_sums']['gross_pred'] = int(sum_gross_pred)
+        utility_json['savings_sums']['portfolio_rr'] = int(sum_gross_actual/sum_gross_pred*100)
 
-        df = utility_data_all[['contractor', actual_col, pred_col]]
-        
-        grouped = df.groupby('contractor')
-
-        for contractor, data in grouped:
-            # only include contractors w/ number of projects over threshold. smarter way of setting threshold?
-            threshold = 10
-            num_projects = data[pred_col].count()
-            if num_projects > threshold:
-                sum_pred = data[pred_col].sum()
-                sum_actual = data[actual_col].sum()
-
-                avg_pred = sum_pred/num_projects
-                avg_actual = sum_actual/num_projects
-
-
-                """
-                # what to do if nan?
-                if numpy.isnan(data[pred_col].sum()):
-                    sum_pred = 0
-                if numpy.isnan(data[actual_col].sum()):
-                    sum_actual = 0
-                """
-                utility_json['savings_by_contractor']['series_pred']['data'].append( int(avg_pred) )
-                utility_json['savings_by_contractor']['series_actual']['data'].append( int(avg_actual) )
-                utility_json['savings_by_contractor']['xlabels'].append( contractor )
-                utility_json['savings_by_contractor']['series_counts'].append( num_projects )
+        ###########################################
+        # prep actual vs pred savings scatterplot #
+        ###########################################
+        utility_json['savings_scatter'] = {}
+        savings_series_realized = {  'name': 'Savings Realized',
+                            'color': 'rgba(0, 177, 106, .5)',
+                            'data': []}
+        savings_series_notrealized = {  'name': 'Savings Not Realized',
+                            'color': 'rgba(232, 126, 4, .5)',
+                            'data': []}
+        savings_series_neg = {  'name': 'Negative Savings',
+                            'color': 'rgba(150, 40, 27, .5)',
+                            'data': []}
+        for row in utility_data_clean.iterrows():
+            actual_val = int(row[1][actual_col])
+            pred_val = int(row[1][pred_col])
+            if actual_val < 0:
+                savings_series_neg['data'].append([pred_val, actual_val])
+            elif row[1][actual_col] < row[1][pred_col]:
+                savings_series_notrealized['data'].append([pred_val, actual_val])
             else:
-                i = i
-            
+                savings_series_realized['data'].append([pred_val, actual_val])
+        if utility_data_clean[actual_col].max() > utility_data_clean[pred_col].max():
+            utility_json['savings_scatter']['plotmax'] = utility_data_clean[pred_col].max()
+        else:
+            utility_json['savings_scatter']['plotmax'] = utility_data_clean[actual_col].max()
+        utility_json['savings_scatter']['dataseries'] = [savings_series_realized, savings_series_notrealized, savings_series_neg]
+
+
 
         filename = 'finished/contractor/'+utility_type+'/'+slug+'.json'
         with open(filename, 'w+') as f:
